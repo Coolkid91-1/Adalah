@@ -1,6 +1,5 @@
 
-// transcriber.js — captures mic + (optional) system audio, streams to WS, shows transcripts.
-// Kept minimal; comments added for clarity.
+// transcriber.js — captures mic + system audio, streams to WS, shows transcripts.
 (() => {
   const WS_URL = "ws://localhost:8765";
 
@@ -13,7 +12,7 @@
   // --- Audio graph state ---
   let audioCtx = null;
   let micStream = null;
-  let sysStream = null;               // optional system/tab audio (Windows/Chrome)
+  let sysStream = null;               // system/tab audio (Windows/Chrome)
   let workletNode = null;             // AudioWorkletNode for PCM generation
   let scriptProcessor = null;         // Fallback path
 
@@ -198,17 +197,17 @@
           const buf = ev.data?.audioData;
           if (buf && wsOpen && websocket?.readyState === WebSocket.OPEN) { try { websocket.send(buf); } catch {} }
         };
-        usedWorklet = true;  // <-- intentionally capitalized to test; we'll correct below
+        usedWorklet = true;  
       }
     } catch (e) {
       console.error("AudioWorklet failed:", e?.message || e);
       usedWorklet = false;
     }
-    // Fix capitalization slip (ensure boolean)
+
     usedWorklet = !!usedWorklet;
 
     if (!usedWorklet) {
-      // Fallback: ScriptProcessor (mixed via a gain node, sent to a silent destination).
+      // Fallback: ScriptProcessor
       const mixGain = audioCtx.createGain(); mixGain.gain.value = 1.0;
       audioCtx.createMediaStreamSource(micStream).connect(mixGain);
       if (sysStream) audioCtx.createMediaStreamSource(sysStream).connect(mixGain);
