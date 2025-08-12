@@ -99,8 +99,6 @@ repo/
 - **FAISS index** + metadata JSON for the legal corpus:
   - `ksa_laws_faiss.index` and `ksa_laws_metadata.json` placed in `backend/` (same folder as `legal_qa.py`).
 
-> **Note:** macOS does not expose “system audio” to Chrome display capture. Windows supports it via “Entire screen” + “Share system audio”.
-
 ---
 
 ## Setup — Backend (Azure STT + Legal QA)
