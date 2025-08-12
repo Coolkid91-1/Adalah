@@ -19,7 +19,8 @@ A lightweight Chrome extension that embeds a side panel in Microsoft Teams pages
 - [Usage](#usage)
 - [How It Works](#how-it-works)
 - [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
+- [Conclusion & Acknowledgment](#Conclusion-&-Acknowledgment)
+- [Licensing](#Licensing)
 
 
 ---
@@ -216,31 +217,15 @@ You should see logs like:
 
 ---
 
-## Troubleshooting
+## Conclusion & Acknowledgment
 
-**1) `SyntaxError: unterminated string literal` in `app_ws.py`**  
-Use the latest `app_ws.py` where the missing-credentials error uses a triple-quoted string.
+This summer co-op at VR-House was a big step for me as a student. I got to move from theory to actual practice planning features, building them, fixing bugs, and seeing how a real project comes together. Working on real problems helped me learn how to make practical decisions, read errors calmly, and write clearer code and documentation.
 
-**2) “Permission dismissed / NotAllowedError” (browser)**  
-You must accept Chrome prompts for microphone and (if you want system audio) display capture.
+I’m especially grateful to my supervisors, **Deemah** and **Linah**, for trusting me and guiding me through the tough parts. Their feedback made a huge difference, and they always gave me space to try, fail, and improve. Thank you for giving me the chance to build this project and learn from it.
 
-**3) No system audio captured (Windows)**  
-When the display-capture sheet appears, choose **Entire screen** and enable **Share system audio**.  
-
-
-**4) “This page has been blocked by Chrome”**  
-Usually happens when reloading content scripts or due to CSP. Close the tab, reopen Teams, and try again.
-
-**5) WebSocket fails to connect**  
-- Ensure the backend is running: `ws://localhost:8765`.  
-- Firewall/AV software may block local WebSockets—allow Python on private networks.  
-- Check `transcriber_server.log` for details.
-
-**6) Nothing shows in the panel but backend logs show recognition**  
-Open DevTools on the Teams page > Console. Look for content-script errors. Reload the page; re-grant permissions.
-
-**7) Audio echoes or sounds muted**  
-The extension **does not** mute the tab. If you hear echo, use a headset or enable echo cancellation (already on by default).
 
 ---
 
+## Licensing
+
+This project is proprietary to **VR-House** and licensed exclusively for **VR-House’s internal use**. All rights reserved.
