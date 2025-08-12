@@ -1,13 +1,6 @@
-# --- Core server ---
 websockets>=15.0,<16.0
-
-# --- Speech-to-Text (set USE_AZURE=true to enable) ---
 azure-cognitiveservices-speech>=1.37.0
-
-# --- Legal QA (FAISS + embeddings) ---
 numpy>=1.24
 sentence-transformers>=2.6.0
 faiss-cpu>=1.7.4
-
-# Torch is pulled by sentence-transformers, but pinning helps
 torch>=2.2
