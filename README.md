@@ -1,6 +1,6 @@
 # Adalah Transcriber (Teams) — Chrome Extension + Azure STT Backend
 
-A lightweight Chrome extension that embeds a side panel in Microsoft Teams pages, captures **microphone + (optional) system audio**, streams raw PCM to a local **WebSocket** backend powered by **Azure Speech-to-Text**, and provides **on‑demand legal Q&A** (Arabic) using a FAISS index of Saudi laws.
+A lightweight Chrome extension that embeds a side panel in Microsoft Teams pages, captures **microphone + system audio**, streams raw PCM to a local **WebSocket** backend powered by **Azure Speech-to-Text**, and provides **on‑demand legal Q&A** (Arabic) using a FAISS index of Saudi laws.
 
 > ✅ **Transcription starts only when you click “ابدأ الاستماع”.**  
 > ✅ **Legal answer appears only when you click “⚖️ اسأل عدالة”.**  
