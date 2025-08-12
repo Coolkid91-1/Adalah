@@ -72,7 +72,6 @@ A lightweight Chrome extension that embeds a side panel in Microsoft Teams pages
 
 ## Repository Layout
 
-Recommended structure (you can keep your current layout if you prefer):
 ```
 repo/
 ├─ backend/
