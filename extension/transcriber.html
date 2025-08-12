@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عدالة - المساعد الذكي</title>
+  <!-- Minimal, readable CSS. Keeps same UI structure. -->
+  <style>
+    :root{
+      --bg:#121212; --panel:#1b1b1b; --muted:#9aa3aa; --text:#f7f7f7;
+      --line:#2a2f36; --brand:#90caf9; --brand-2:#4caf50; --danger:#ef5350;
+      --chip-bg:#1f2430; --bubble-in:#1c2836; --bubble-ai:#1c3324;
+      --shadow:0 10px 30px rgba(0,0,0,.35); --radius:14px; --pad:14px;
+    }
+    html, body { margin:0; height:100vh; background:var(--bg); color:var(--text);
+      font-family:"Cairo","Segoe UI",Tahoma,Arial,sans-serif; overflow:hidden; }
+    .shell { height:100%; display:flex; flex-direction:column; padding:16px; gap:12px;
+      background:linear-gradient(135deg,#171717,#1c1c1c 40%,#202020); }
+
+    /* Header */
+    .header { display:flex; align-items:center; justify-content:space-between;
+      padding:12px var(--pad); border:1px solid var(--line);
+      background:#171a20; border-radius:var(--radius); box-shadow:var(--shadow); }
+    .title { display:flex; align-items:center; gap:10px; font-weight:800; color:var(--brand); }
+    .title .dot { width:8px; height:8px; background:var(--brand); border-radius:50%; box-shadow:0 0 16px var(--brand); }
+    .status { padding:6px 10px; border-radius:9999px; font-size:.85rem; border:1px solid #2b3440;
+      background:var(--chip-bg); color:#bcd6ff; }
+
+    /* Controls */
+    .controls { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+    .btn { border:0; padding:12px 16px; border-radius:12px; font-weight:800;
+      color:#fff; cursor:pointer; box-shadow:var(--shadow); transition:transform .08s ease;
+      min-width:160px; font-size:.95rem; }
+    .btn:active { transform:translateY(1px) scale(.98); }
+    .btn:disabled { opacity:.55; cursor:not-allowed; }
+    .btn-start { background:linear-gradient(140deg,#1e88e5,#42a5f5); }
+    .btn-stop  { background:linear-gradient(140deg,#b71c1c,#ef5350); }
+    .btn-ask   { background:linear-gradient(140deg,#2e7d32,#66bb6a); }
+    .hintline { color:#cfd8dc; font-size:.9rem; text-align:center; opacity:.8; }
+
+    /* Feeds */
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; min-height:0; }
+    .panel { display:flex; flex-direction:column; border:1px solid var(--line);
+      background:#15171c; border-radius:var(--radius); min-height:0; box-shadow:var(--shadow); }
+    .panel .hd { padding:10px var(--pad); border-bottom:1px solid var(--line); color:var(--brand); font-weight:800; }
+    .panel .feed { padding:12px; overflow:auto; flex:1; scroll-behavior:smooth; }
+    .panel .feed::-webkit-scrollbar { width:10px; }
+    .panel .feed::-webkit-scrollbar-thumb { background:#2a2f36; border-radius:12px; }
+
+    /* Message bubble */
+    .msg { position:relative; padding:12px 14px; border-radius:12px; margin-bottom:10px; border:1px solid #28313b; animation:fadeIn .2s ease-out; }
+    .msg--in  { background:var(--bubble-in); }
+    .msg--ai  { background:var(--bubble-ai); border-color:#2b3a2c; }
+    .msg__head { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+    .msg__who  { font-weight:800; color:var(--brand); font-size:.9rem; }
+    .msg__time { color:var(--muted); font-size:.78rem; }
+    .msg__txt  { color:#eaf2ff; line-height:1.7; white-space:pre-wrap; }
+
+    /* Clamp long text, toggled by user */
+    .msg[data-collapsed="true"] .msg__txt { display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
+    .expand { display:none; margin-top:6px; color:#b0bec5; cursor:pointer; font-size:.85rem; }
+    .msg[data-overflow="true"] .expand { display:inline-block; }
+
+    /* Copy button (hover) */
+    .copy { position:absolute; inset-inline-start:10px; inset-block-start:10px; opacity:0; transition:opacity .15s;
+      background:#253040; border:1px solid #324155; color:#cfe2ff; border-radius:999px; font-size:.8rem; padding:4px 8px; cursor:pointer; }
+    .msg:hover .copy { opacity:1; }
+
+    /* Jump-to-latest chip for transcripts */
+    .jump { position:sticky; inset-block-end:6px; margin-inline:auto; width:max-content; z-index:2;
+      padding:8px 12px; border-radius:9999px; background:#20334d; color:#d3e8ff;
+      border:1px solid #2b3f5a; cursor:pointer; box-shadow:var(--shadow); display:none;
+      font-weight:700; font-size:.9rem; }
+
+    @keyframes fadeIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+    @media (prefers-reduced-motion:reduce){ .msg{animation:none;} }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="header">
+      <div class="title"><span class="dot"></span> 🎤 عدالة - المساعد القانوني</div>
+      <div id="status" class="status">🔄 جاهز</div>
+    </div>
+
+    <div class="controls">
+      <button id="startButton" class="btn btn-start">▶️ ابدأ الاستماع</button>
+      <button id="stopButton" class="btn btn-stop" disabled>⏹️ إيقاف</button>
+      <button id="askButton" class="btn btn-ask" disabled>⚖️ اسأل عدالة</button>
+    </div>
+
+    <div class="hintline">
+      آخر نص سيُستخدم للإجابة عند الضغط على “اسأل عدالة”.
+      <span id="lastSnippet" style="color:#fff; font-weight:700">—</span>
+    </div>
+
+    <div class="row">
+      <section class="panel">
+        <div class="hd">📝 النص المسموع</div>
+        <div id="transcript" class="feed">
+          <button id="jump" class="jump">⬇️ الانتقال لأحدث نص</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="hd">⚖️ الإجابة القانونية</div>
+        <div id="response" class="feed">
+          <div class="msg msg--ai" data-collapsed="true">
+            <div class="msg__head">
+              <div class="msg__who" style="color:var(--brand-2)">عدالة</div>
+              <div class="msg__time">لن تظهر إجابة إلا عند الضغط على “اسأل عدالة”.</div>
+            </div>
+            <div class="msg__txt">يمكنك إيقاف الجلسة في أي وقت من زر “إيقاف”.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script src="transcriber.js"></script>
+</body>
+</html>

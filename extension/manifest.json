@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "Adalah Transcriber",
+  "version": "1.2.1",
+  "description": "Transcribes Teams audio and answers legal questions on demand.",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "permissions": [],
+  "host_permissions": [
+    "https://teams.microsoft.com/*",
+    "https://*.teams.microsoft.com/*",
+    "https://teams.live.com/*",
+    "https://*.teams.live.com/*",
+    "http://localhost:8765/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://teams.microsoft.com/*",
+        "https://*.teams.microsoft.com/*",
+        "https://teams.live.com/*",
+        "https://*.teams.live.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "transcriber.html",
+        "transcriber.js"
+      ],
+      "matches": [
+        "https://teams.microsoft.com/*",
+        "https://*.teams.microsoft.com/*",
+        "https://teams.live.com/*",
+        "https://*.teams.live.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' ws://localhost:8765 http://localhost:8765;"
+  }
+}
