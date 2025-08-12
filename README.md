@@ -226,7 +226,7 @@ You must accept Chrome prompts for microphone and (if you want system audio) dis
 
 **3) No system audio captured (Windows)**  
 When the display-capture sheet appears, choose **Entire screen** and enable **Share system audio**.  
-> macOS currently does **not** provide system audio to Chrome display capture.
+
 
 **4) “This page has been blocked by Chrome”**  
 Usually happens when reloading content scripts or due to CSP. Close the tab, reopen Teams, and try again.
