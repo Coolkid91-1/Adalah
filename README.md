@@ -60,12 +60,12 @@ A lightweight Chrome extension that embeds a side panel in Microsoft Teams pages
 
 ## Features
 
-- **Thin, expandable panel** injected on Teams pages.
-- **Mic + optional system audio** capture and mixing; no tab muting.
+- **Thin, expandable panel** injected on Microsoft Teams pages.
+- **Mic + optional system audio** capture and mixing.
 - **Low-latency PCM** via `AudioWorklet`; safe fallback to `ScriptProcessor`.
 - **Arabic transcription** using Azure Speech (region/language configurable).
 - **On-demand legal answer** (Arabic), using FAISS search over Saudi laws.
-- **No background auto-answers**—you stay in control.
+- **No background auto-answers**
 - **No persistent storage** of audio or text by default.
 
 ---
