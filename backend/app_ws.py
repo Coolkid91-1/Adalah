@@ -1,7 +1,6 @@
-# app_ws.py — Minimal WebSocket server for Azure STT + on-demand Legal QA.
+# app_ws.py — Minimal WebSocket server for Azure STT + on-demand Legal QA (RAG).
 # - Streams raw PCM (16 kHz, mono, 16-bit) from the client to Azure Speech.
 # - Sends live transcript lines back immediately.
-# - Only answers when client sends {"type":"ask_answer"} (uses last recognized text).
 
 from __future__ import annotations
 
@@ -37,14 +36,16 @@ if not AZURE_KEY or not AZURE_REGION:
         "bash: export AZURE_KEY='...'; export AZURE_REGION='...'; python app_ws.py"
     )
 
-# ---- Legal QA hook ----
+# ---- Legal QA (RAG) hook ----
+# Always use the RAG entrypoint from legal_qa.py
 try:
-    from legal_qa import get_best_match_answer
-    log.info("Legal QA loaded.")
+    from legal_qa import rag_answer
+    log.info("Legal QA (RAG) loaded.")
 except Exception as e:  # pragma: no cover
     log.exception("Failed to import legal_qa: %s", e)
-    def get_best_match_answer(q: str) -> str:  # fallback
-        return "هذه إجابة قانونية تجريبية."
+
+    def rag_answer(q: str, *args, **kwargs):  # final fallback if import fails
+        return {"answer": "تعذر تحميل وحدة الإجابة القانونية.", "sources": [], "backend": "none", "retrieved": 0}
 
 # ---- Per-connection session ----
 class Session:
@@ -69,9 +70,32 @@ class Session:
         await self.ws.send(f"📄 المتحدث: {text}")
 
     async def send_answer(self, text: str) -> None:
-        answer = (get_best_match_answer(text) or "").strip() or "لا توجد إجابة."
-        await self.ws.send(f"🤖 عدالة: {answer}")
+        """
+        Always use RAG (Ollama by default; HF fallback is handled inside legal_qa.py).
+        Formats a short sources tail under the answer, aligned with [1][2]… citations.
+        """
+        try:
+            out = rag_answer(text, k_retrieve=6, max_ctx_chars=7000, backend=os.getenv("RAG_BACKEND", "llama"))
+            answer = (out.get("answer") or "").strip()
+            sources = out.get("sources") or []
 
+            tail_lines = []
+            for i, s in enumerate(sources, 1):
+                law = s.get("law_title") or "قانون غير مُسمّى"
+                art = s.get("article_title") or ""
+                url = s.get("url") or ""
+                name = (f"{art} — {law}" if art else law).strip(" —")
+                if url:
+                    tail_lines.append(f"[{i}] {name}\n{url}")
+                else:
+                    tail_lines.append(f"[{i}] {name}")
+
+            tail = ("\n\nالمراجع:\n" + "\n".join(tail_lines)) if tail_lines else ""
+            payload = f"🤖 عدالة: {answer}{tail}" if answer else "🤖 عدالة: لا توجد إجابة."
+        except Exception as e:
+            log.error("RAG error: %s", e)
+            payload = "🤖 عدالة: تعذر توليد إجابة مُبرهنة حاليًا."
+        await self.ws.send(payload)
 
 # ---- Azure continuous recognition ----
 async def start_azure(session: Session) -> None:
@@ -92,9 +116,11 @@ async def start_azure(session: Session) -> None:
         text = (evt.result.text or "").strip()
         if not text:
             return
+
         async def push():
             session.last_text = text
             await session.send_transcript(text)
+
         asyncio.run_coroutine_threadsafe(push(), session.loop)
 
     recognizer.recognized.connect(on_recognized)
@@ -125,7 +151,6 @@ async def start_azure(session: Session) -> None:
 
     session.azure_task = asyncio.create_task(run())
 
-
 # ---- Incoming data handlers ----
 async def handle_binary(session: Session, data: bytes) -> None:
     """Handle raw PCM chunks from the client."""
@@ -138,7 +163,6 @@ async def handle_binary(session: Session, data: bytes) -> None:
             await session.pcm_q.put(data)
         except Exception:
             pass
-
 
 async def handle_text(session: Session, text: str) -> None:
     """Handle control messages from the client (JSON)."""
@@ -155,12 +179,12 @@ async def handle_text(session: Session, text: str) -> None:
     elif t == "ping":
         await session.ws.send(json.dumps({"type": "pong", "ts": time.time()}))
     elif t == "ask_answer":
+        # Prefer explicit text from client; otherwise use last recognized transcript
         query = (msg.get("text") or "").strip() or (session.last_text or "").strip()
         if not query:
             await session.ws.send("🤖 عدالة: لا يوجد نص حديث للاستخدام.")
             return
         await session.send_answer(query)
-
 
 # ---- WebSocket handler ----
 async def handle_client(ws: websockets.WebSocketServerProtocol) -> None:
@@ -199,7 +223,6 @@ async def handle_client(ws: websockets.WebSocketServerProtocol) -> None:
             pass
         log.info("cleanup: %s", sid)
 
-
 # ---- Entrypoint ----
 async def main() -> None:
     host, port = "localhost", 8765
@@ -207,7 +230,6 @@ async def main() -> None:
     async with websockets.serve(handle_client, host, port, max_size=2**23):
         while True:
             await asyncio.sleep(30)
-
 
 if __name__ == "__main__":
     try:

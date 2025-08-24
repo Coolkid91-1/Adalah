@@ -296,3 +296,148 @@ ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
 2025-08-12 16:15:04,956 - INFO - Azure recognition starting...
 2025-08-12 16:15:19,169 - INFO - cleanup: ::1:63416
 2025-08-12 16:15:19,446 - INFO - Azure recognition stopped.
+2025-08-14 16:54:49,136 - INFO - Loading faiss with AVX512 support.
+2025-08-14 16:54:49,137 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-08-14 16:54:49,137 - INFO - Loading faiss with AVX2 support.
+2025-08-14 16:54:49,153 - INFO - Successfully loaded faiss with AVX2 support.
+2025-08-14 16:54:49,157 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-08-14 16:54:55,626 - INFO - PyTorch version 2.7.1+cu128 available.
+2025-08-14 16:54:56,062 - INFO - 📥 Loading FAISS index and metadata...
+2025-08-14 16:54:56,178 - INFO - Use pytorch device_name: cuda:0
+2025-08-14 16:54:56,178 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-08-14 16:55:01,337 - INFO - Legal QA loaded.
+2025-08-14 16:55:01,341 - INFO - starting server at ws://localhost:8765
+2025-08-14 16:55:01,507 - INFO - server listening on 127.0.0.1:8765
+2025-08-14 16:55:01,507 - INFO - server listening on [::1]:8765
+2025-08-14 16:55:21,762 - INFO - connection open
+2025-08-14 16:55:21,762 - INFO - client connected: ::1:63291
+2025-08-14 16:55:21,763 - INFO - Azure recognition starting...
+2025-08-14 16:57:46,145 - INFO - cleanup: ::1:63291
+2025-08-14 16:57:46,816 - INFO - Azure recognition stopped.
+2025-08-14 16:57:55,626 - INFO - server closing
+2025-08-14 16:57:55,626 - INFO - server closed
+2025-08-14 17:00:25,659 - INFO - Loading faiss with AVX512 support.
+2025-08-14 17:00:25,660 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-08-14 17:00:25,660 - INFO - Loading faiss with AVX2 support.
+2025-08-14 17:00:25,678 - INFO - Successfully loaded faiss with AVX2 support.
+2025-08-14 17:00:25,682 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-08-14 17:00:30,907 - INFO - PyTorch version 2.7.1+cu128 available.
+2025-08-14 17:00:31,249 - INFO - 📥 Loading FAISS index and metadata...
+2025-08-14 17:00:31,360 - INFO - Use pytorch device_name: cuda:0
+2025-08-14 17:00:31,360 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-08-14 17:00:36,344 - INFO - Legal QA (RAG) loaded.
+2025-08-14 17:00:36,345 - INFO - starting server at ws://localhost:8765
+2025-08-14 17:00:36,366 - INFO - server listening on [::1]:8765
+2025-08-14 17:00:36,366 - INFO - server listening on 127.0.0.1:8765
+2025-08-14 17:01:08,662 - INFO - connection open
+2025-08-14 17:01:08,662 - INFO - client connected: ::1:63659
+2025-08-14 17:01:08,662 - INFO - Azure recognition starting...
+2025-08-14 17:38:50,942 - INFO - cleanup: ::1:63659
+2025-08-14 17:38:51,166 - INFO - Azure recognition stopped.
+2025-08-18 10:17:10,103 - INFO - Loading faiss with AVX512 support.
+2025-08-18 10:17:10,104 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-08-18 10:17:10,104 - INFO - Loading faiss with AVX2 support.
+2025-08-18 10:17:10,363 - INFO - Successfully loaded faiss with AVX2 support.
+2025-08-18 10:17:10,393 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-08-18 10:17:56,704 - INFO - PyTorch version 2.7.1+cu128 available.
+2025-08-18 10:17:59,843 - INFO - 📥 Loading FAISS index and metadata...
+2025-08-18 10:18:00,019 - INFO - Use pytorch device_name: cuda:0
+2025-08-18 10:18:00,019 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-08-18 10:18:10,165 - INFO - Legal QA (RAG) loaded.
+2025-08-18 10:18:10,165 - INFO - starting server at ws://localhost:8765
+2025-08-18 10:18:10,309 - INFO - server listening on [::1]:8765
+2025-08-18 10:18:10,309 - INFO - server listening on 127.0.0.1:8765
+2025-08-18 10:18:38,185 - INFO - connection open
+2025-08-18 10:18:38,186 - INFO - client connected: ::1:65109
+2025-08-18 10:18:38,186 - INFO - Azure recognition starting...
+2025-08-18 10:18:48,170 - INFO - cleanup: ::1:65109
+2025-08-18 10:18:48,391 - INFO - Azure recognition stopped.
+2025-08-18 10:58:05,395 - INFO - connection open
+2025-08-18 10:58:05,395 - INFO - client connected: ::1:65202
+2025-08-18 10:58:05,395 - INFO - Azure recognition starting...
+2025-08-18 11:00:16,440 - INFO - cleanup: ::1:65202
+2025-08-18 11:00:16,825 - INFO - Azure recognition stopped.
+2025-08-18 12:01:09,302 - INFO - connection open
+2025-08-18 12:01:09,302 - INFO - client connected: ::1:49596
+2025-08-18 12:01:09,302 - INFO - Azure recognition starting...
+2025-08-18 12:01:24,826 - INFO - cleanup: ::1:49596
+2025-08-18 12:01:25,210 - INFO - Azure recognition stopped.
+2025-08-18 12:01:26,182 - INFO - connection open
+2025-08-18 12:01:26,182 - INFO - client connected: ::1:49598
+2025-08-18 12:01:26,182 - INFO - Azure recognition starting...
+2025-08-18 12:24:33,759 - INFO - Loading faiss with AVX512 support.
+2025-08-18 12:24:33,759 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-08-18 12:24:33,759 - INFO - Loading faiss with AVX2 support.
+2025-08-18 12:24:34,002 - INFO - Successfully loaded faiss with AVX2 support.
+2025-08-18 12:24:34,028 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-08-18 12:25:17,516 - INFO - PyTorch version 2.7.1+cu128 available.
+2025-08-18 12:25:20,528 - INFO - 📥 Loading FAISS index and metadata...
+2025-08-18 12:25:20,671 - INFO - Use pytorch device_name: cuda:0
+2025-08-18 12:25:20,671 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-08-18 12:25:31,882 - INFO - Legal QA (RAG) loaded.
+2025-08-18 12:25:31,884 - INFO - starting server at ws://localhost:8765
+2025-08-18 12:25:32,010 - INFO - server listening on [::1]:8765
+2025-08-18 12:25:32,010 - INFO - server listening on 127.0.0.1:8765
+2025-08-18 12:26:53,289 - INFO - connection open
+2025-08-18 12:26:53,289 - INFO - client connected: ::1:63100
+2025-08-18 12:26:53,290 - INFO - Azure recognition starting...
+2025-08-18 12:30:10,103 - INFO - cleanup: ::1:63100
+2025-08-18 12:30:10,565 - INFO - Azure recognition stopped.
+2025-08-18 16:38:27,816 - INFO - server closing
+2025-08-18 16:38:27,816 - INFO - server closed
+2025-08-18 18:22:50,719 - INFO - Loading faiss with AVX512 support.
+2025-08-18 18:22:50,719 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-08-18 18:22:50,719 - INFO - Loading faiss with AVX2 support.
+2025-08-18 18:22:50,742 - INFO - Successfully loaded faiss with AVX2 support.
+2025-08-18 18:22:50,747 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-08-18 18:22:58,496 - INFO - PyTorch version 2.7.1+cu128 available.
+2025-08-18 18:22:59,081 - INFO - 📥 Loading FAISS index and metadata...
+2025-08-18 18:22:59,195 - INFO - Use pytorch device_name: cuda:0
+2025-08-18 18:22:59,195 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-08-18 18:23:05,104 - INFO - Legal QA (RAG) loaded.
+2025-08-18 18:23:05,104 - INFO - starting server at ws://localhost:8765
+2025-08-18 18:23:05,136 - INFO - server listening on [::1]:8765
+2025-08-18 18:23:05,136 - INFO - server listening on 127.0.0.1:8765
+2025-08-18 18:26:00,447 - INFO - connection open
+2025-08-18 18:26:00,447 - INFO - client connected: ::1:53104
+2025-08-18 18:26:00,447 - INFO - Azure recognition starting...
+2025-08-18 18:32:13,880 - INFO - cleanup: ::1:53104
+2025-08-18 18:32:14,145 - INFO - Azure recognition stopped.
+2025-08-18 19:43:33,160 - INFO - server closing
+2025-08-18 19:43:33,161 - INFO - server closed
+2025-08-21 15:11:39,799 - INFO - Loading faiss with AVX512 support.
+2025-08-21 15:11:39,800 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-08-21 15:11:39,800 - INFO - Loading faiss with AVX2 support.
+2025-08-21 15:11:39,984 - INFO - Successfully loaded faiss with AVX2 support.
+2025-08-21 15:11:40,006 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-08-21 15:12:29,081 - INFO - PyTorch version 2.7.1+cu128 available.
+2025-08-21 15:12:32,665 - INFO - 📥 Loading FAISS index and metadata...
+2025-08-21 15:12:32,827 - INFO - Use pytorch device_name: cuda:0
+2025-08-21 15:12:32,827 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-08-21 15:12:46,494 - INFO - Legal QA (RAG) loaded.
+2025-08-21 15:12:46,497 - INFO - starting server at ws://localhost:8765
+2025-08-21 15:12:46,652 - INFO - server listening on 127.0.0.1:8765
+2025-08-21 15:12:46,652 - INFO - server listening on [::1]:8765
+2025-08-21 15:12:51,716 - INFO - connection open
+2025-08-21 15:12:51,716 - INFO - client connected: ::1:58535
+2025-08-21 15:12:51,716 - INFO - Azure recognition starting...
+2025-08-21 15:12:59,006 - INFO - cleanup: ::1:58535
+2025-08-21 15:12:59,554 - INFO - Azure recognition stopped.
+2025-08-21 15:20:09,069 - INFO - connection open
+2025-08-21 15:20:09,070 - INFO - client connected: ::1:55307
+2025-08-21 15:20:09,070 - INFO - Azure recognition starting...
+2025-08-21 15:35:06,454 - INFO - cleanup: ::1:55307
+2025-08-21 15:35:07,098 - INFO - Azure recognition stopped.
+2025-08-21 16:28:24,265 - INFO - connection open
+2025-08-21 16:28:24,266 - INFO - client connected: ::1:65418
+2025-08-21 16:28:24,266 - INFO - Azure recognition starting...
+2025-08-21 16:34:09,742 - INFO - cleanup: ::1:65418
+2025-08-21 16:34:10,408 - INFO - Azure recognition stopped.
+2025-08-21 19:23:17,981 - INFO - server closing
+2025-08-21 19:23:17,981 - INFO - server closed
