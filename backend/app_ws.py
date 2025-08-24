@@ -14,8 +14,8 @@ from typing import Optional
 import websockets  # pip install websockets>=12
 # Azure SDK (pip install azure-cognitiveservices-speech)
 try:
-    import azure.cognitiveservices.speech as speechsdk  # type: ignore
-except Exception as e:  # pragma: no cover
+    import azure.cognitiveservices.speech as speechsdk 
+except Exception as e:  
     raise RuntimeError("Azure Speech SDK missing. Run: pip install azure-cognitiveservices-speech") from e
 
 # ---- Logging ----
@@ -37,7 +37,10 @@ if not AZURE_KEY or not AZURE_REGION:
     )
 
 # ---- Legal QA (RAG) hook ----
+<<<<<<< HEAD
 # Always use the RAG entrypoint from legal_qa.py
+=======
+>>>>>>> ec0f300bd0fbc3ebf720f0e8a39480d9be1a8386
 try:
     from legal_qa import rag_answer
     log.info("Legal QA (RAG) loaded.")
@@ -111,7 +114,6 @@ async def start_azure(session: Session) -> None:
     recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=session.azure_audio_cfg)
     session.azure_recognizer = recognizer
 
-    # Callback from SDK (non-async): hop into event loop with run_coroutine_threadsafe
     def on_recognized(evt) -> None:
         text = (evt.result.text or "").strip()
         if not text:

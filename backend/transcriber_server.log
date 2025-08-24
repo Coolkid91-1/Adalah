@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2025-08-11 19:12:39,236 - INFO - Loading faiss with AVX512 support.
 2025-08-11 19:12:39,236 - INFO - Could not load library with AVX512 support due to:
 ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
@@ -441,3 +442,6 @@ ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
 2025-08-21 16:34:10,408 - INFO - Azure recognition stopped.
 2025-08-21 19:23:17,981 - INFO - server closing
 2025-08-21 19:23:17,981 - INFO - server closed
+=======
+
+>>>>>>> ec0f300bd0fbc3ebf720f0e8a39480d9be1a8386

@@ -128,7 +128,7 @@
     document.addEventListener("mouseup", onUp);
   });
 
-  // Notify iframe (optional)
+  // Notify iframe
   frame.addEventListener("load", () => {
     try { frame.contentWindow.postMessage({ type: "extension_ready" }, "*"); } catch {}
   });
